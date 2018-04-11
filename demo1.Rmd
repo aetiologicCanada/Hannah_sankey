@@ -1,0 +1,45 @@
+---
+title: "ForHannah"
+author: "RCJ"
+date: "April 11, 2018"
+output: html_document
+---
+
+```{r setup}
+
+library(networkD3)
+```
+```{r builddataframe}
+
+nodes = data.frame("name" =
+                  c("Total Inital Votes", # Node 0
+                    "Food", # Node 1
+                    "Money", # Node 2
+                    "Time", # Node 3
+                    "Food", # Node 4
+                    "Money", # Node 5
+                    "Time"))# Node 6
+links = as.data.frame(matrix(c(
+   0, 1, 190, # Each row represents a link. The first number
+   0, 2, 178, # represents the node being conntected from.
+   0, 3, 116, # the second number represents the node connected to.
+   1, 4, 55,
+   1, 5, 98,
+   1, 6, 37,
+   2, 4, 5,
+   2, 5, 166,
+   2, 6, 7,
+   3, 4, 1,
+   3, 5, 25,
+   3, 6, 90),# The third number is the value of the node
+   byrow = TRUE, ncol = 3))
+names(links) = c("source", "target", "value")
+```
+
+```{r}
+
+sankeyNetwork(Links = links, Nodes = nodes,
+           Source = "source", Target = "target",
+           Value = "value", NodeID = "name",
+           fontSize= 12, nodeWidth = 30)
+```
